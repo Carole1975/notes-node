@@ -4,7 +4,21 @@ const yargs = require('yargs');
 
 const notes = require('./notes.js');
 
-const argv = yargs.argv;
+const argv = yargs
+.command('add', 'Add a new note', {
+  title: {
+    describe: 'Title of the note',
+    demand: true,
+    alias: 't'
+  },
+    body: {
+      describe: 'Body of the note',
+      demand: true,
+      alias: 'b'
+    }
+})
+.help()
+.argv;
 var command = argv._[0];
 
 var displayNote = (note) => {
@@ -17,8 +31,8 @@ var displayNote = (note) => {
 if (command === 'add'){
   var note = notes.addNote(argv.title, argv.body);
 if(note){
-  console.log(`Note created :
-    ${displayNote(note)}`);
+  console.log(`Note created!`);
+    displayNote(note);
 } else {
   console.log("Title already taken.");
 }
