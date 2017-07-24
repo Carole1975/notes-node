@@ -13,7 +13,8 @@ console.log("Yargs: ", argv);
 
 
 if (command === 'add'){
-  notes.addNote(argv.title, argv.body);
+  var note = notes.addNote(argv.title, argv.body);
+  note == undefined? console.log("A note with the same title already exists."):console.log("Successfully added note ", note.title);
 } else if (command === "list"){
   notes.getAll();
 }else if (command === "get"){

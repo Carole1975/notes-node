@@ -12,8 +12,9 @@ var fetchNotes = () => {
   }
 };
 
-var saveNotes = () => {
-
+var saveNotes = (notes) => {
+  var notesString = JSON.stringify(notes);
+  fs.writeFileSync('notes-data.json', notesString);
 };
 
 var addNote = (title, body) => {
@@ -26,13 +27,10 @@ var addNote = (title, body) => {
   var duplicateNotes = notes.filter((note) => note.title === title);
 
   if (duplicateNotes.length == 0) {
-  notes.push(note);
-  var notesString = JSON.stringify(notes);
-  fs.writeFileSync('notes-data.json', notesString);
-  console.log('Successfully added: ', title);
-} else {
-  console.log("A note with the same title already exists.");
-}
+    notes.push(note);
+    saveNotes(notes);
+    return note;
+  } 
 }
 
 var getAll = () => {
