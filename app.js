@@ -11,14 +11,18 @@ var command = argv._[0];
 console.log("Command: ", command);
 console.log("Yargs: ", argv);
 
+var displayNote = (note) => {
+  return `---
+  Title: ${note.title}
+  Body: ${note.body}`;
+}
+
 
 if (command === 'add'){
   var note = notes.addNote(argv.title, argv.body);
 if(note){
   console.log(`Note created :
-    ---
-    Title: ${note.title}
-    Body: ${note.body}`);
+    ${displayNote(note)}`);
 } else {
   console.log("Title already taken.");
 }
