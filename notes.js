@@ -9,17 +9,23 @@ var addNote = (title, body) => {
     body
   };
 
-try {
-  var notesString = fs.readFileSync('notes-data.json');
-  notes = JSON.parse(notesString);
-} catch(e) {
-  console.log("Initiated a new JSON file.");
-}
+  try {
+    var notesString = fs.readFileSync('notes-data.json');
+    notes = JSON.parse(notesString);
+  } catch(e) {
+    console.log("Initiated a new JSON file.");
+  }
 
-  notes.push(note);
+  var duplicateNotes = notes.filter((note) => note.title === title);
+
+  if (duplicateNotes.length == 0) {
+  notes.push(note); 
   var notesString = JSON.stringify(notes);
   fs.writeFileSync('notes-data.json', notesString);
   console.log('Successfully added: ', title);
+} else {
+  console.log("A note with the same title already exists.");
+}
 }
 
 var getAll = () => {
