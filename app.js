@@ -27,7 +27,11 @@ if(note){
 }else if (command === "get"){
   notes.getNote(argv.title);
 }else if (command === "remove"){
-  notes.removeNote(argv.title);
+  if (notes.removeNote(argv.title)){
+    console.log("Note removed.");
+  } else {
+    console.log("No such note.");
+  }
 }else {
   console.log("Command  ")
 }
