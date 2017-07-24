@@ -1,5 +1,3 @@
-console.log("Starting app.js.");
-
 const fs = require('fs');
 const _ = require('lodash');
 const yargs = require('yargs');
@@ -8,13 +6,11 @@ const notes = require('./notes.js');
 
 const argv = yargs.argv;
 var command = argv._[0];
-console.log("Command: ", command);
-console.log("Yargs: ", argv);
 
 var displayNote = (note) => {
-  return `---
+  console.log(`---
   Title: ${note.title}
-  Body: ${note.body}`;
+  Body: ${note.body}`);
 }
 
 
@@ -28,10 +24,9 @@ if(note){
 }
 } else if (command === "list"){
   var listNotes = notes.getAll();
-  var msgNotes = `Printing ${listNotes.length} notes :
-  `;
-  listNotes.map((note) => msgNotes += displayNote(note));
-  console.log(msgNotes);
+  console.log(`Printing ${listNotes.length} note(s) :
+  `);
+  listNotes.map((note) => displayNote(note));
 }else if (command === "get"){
   var note = notes.getNote(argv.title);
   if(note){
