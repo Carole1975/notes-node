@@ -27,7 +27,11 @@ if(note){
   console.log("Title already taken.");
 }
 } else if (command === "list"){
-  notes.getAll();
+  var listNotes = notes.getAll();
+  var msgNotes = `Printing ${listNotes.length} notes :
+  `;
+  listNotes.map((note) => msgNotes += displayNote(note));
+  console.log(msgNotes);
 }else if (command === "get"){
   var note = notes.getNote(argv.title);
   if(note){
